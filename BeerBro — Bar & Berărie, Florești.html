@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)file:///C:/Users/LENOVO/Downloads/index_3.html -->
+<html lang="ro"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BeerBro — Bar &amp; Berărie, Florești</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link href="./BeerBro — Bar &amp; Berărie, Florești_files/css2" rel="stylesheet">
+<style>
+  :root{
+    --amber:#d98e22;
+    --amber-bright:#f0a93f;
+    --wood-dark:#241712;
+    --wood:#3a2419;
+    --cream:#f3e6cf;
+    --foam:#f7efdd;
+    --ink:#1a110d;
+    --line: rgba(243,230,207,0.14);
+    --radius: 2px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--wood-dark);
+    color:var(--foam);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Anton', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    line-height:0.95;
+    color:var(--foam);
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--amber-bright);
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1140px; margin:0 auto; padding:0 28px;}
+  img{max-width:100%; display:block;}
+
+  /* subtle wood grain texture */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    pointer-events:none;
+    z-index:0;
+    background:
+      repeating-linear-gradient(115deg, rgba(217,142,34,0.025) 0px, rgba(217,142,34,0.025) 2px, transparent 2px, transparent 7px),
+      radial-gradient(ellipse at 20% 0%, rgba(217,142,34,0.07), transparent 55%);
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(26,17,13,0.0);
+    border-bottom:1px solid transparent;
+    transition:background .35s ease, border-color .35s ease, padding .35s ease;
+    padding:22px 0;
+  }
+  header.scrolled{
+    background:rgba(26,17,13,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom:1px solid var(--line);
+    padding:14px 0;
+  }
+  header .wrap{display:flex; align-items:center; justify-content:space-between;}
+  .logo{
+    font-family:'Anton', sans-serif;
+    font-size:1.5rem;
+    letter-spacing:0.02em;
+    display:flex; align-items:center; gap:10px;
+  }
+  .logo .dot{
+    width:9px; height:9px; border-radius:50%;
+    background:var(--amber-bright);
+    box-shadow:0 0 10px var(--amber-bright);
+  }
+  nav{display:flex; gap:34px;}
+  nav a{
+    font-size:0.86rem;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--cream);
+    opacity:0.8;
+    position:relative;
+    padding-bottom:4px;
+    transition:opacity .2s ease;
+  }
+  nav a:hover{opacity:1;}
+  nav a::after{
+    content:""; position:absolute; left:0; bottom:0; height:2px; width:0;
+    background:var(--amber-bright); transition:width .25s ease;
+  }
+  nav a:hover::after{width:100%;}
+  .burger{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; z-index:120;}
+  .burger span{width:24px; height:2px; background:var(--foam); transition:all .25s ease;}
+  .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .burger.open span:nth-child(2){opacity:0;}
+  .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  .mobile-nav{
+    display:none;
+    position:fixed; inset:0; z-index:110;
+    background:var(--wood-dark);
+    flex-direction:column; align-items:center; justify-content:center; gap:30px;
+    transform:translateY(-100%);
+    transition:transform .35s ease;
+  }
+  .mobile-nav.open{transform:translateY(0); display:flex;}
+  .mobile-nav a{font-family:'Anton',sans-serif; font-size:1.8rem; text-transform:uppercase;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex; align-items:center;
+    padding-top:90px;
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute; inset:0; z-index:0;
+    background:
+      radial-gradient(circle at 78% 30%, rgba(217,142,34,0.22), transparent 45%),
+      linear-gradient(180deg, var(--wood-dark) 0%, var(--ink) 100%);
+  }
+  .hero .wrap{position:relative; z-index:2; display:grid; grid-template-columns:1.15fr 0.85fr; gap:50px; align-items:center;}
+  .badge-row{display:flex; align-items:center; gap:14px; margin-bottom:26px;}
+  .rating-badge{
+    display:flex; align-items:center; gap:8px;
+    border:1px solid var(--line);
+    background:rgba(243,230,207,0.04);
+    padding:8px 14px;
+    border-radius:100px;
+  }
+  .stars{color:var(--amber-bright); font-size:0.95rem; letter-spacing:1px;}
+  .rating-num{font-family:'JetBrains Mono',monospace; font-weight:600; font-size:0.85rem;}
+  .rating-sub{font-size:0.78rem; opacity:0.65;}
+
+  .hero h1{
+    font-size:clamp(3.2rem, 7vw, 6rem);
+    margin-bottom:22px;
+  }
+  .hero h1 .stroke{
+    -webkit-text-stroke:2px var(--amber-bright);
+    color:transparent;
+  }
+  .hero p.lede{
+    font-size:1.1rem;
+    max-width:480px;
+    color:var(--cream);
+    opacity:0.82;
+    margin-bottom:34px;
+  }
+  .cta-row{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:15px 28px;
+    font-weight:700; font-size:0.85rem;
+    text-transform:uppercase; letter-spacing:0.06em;
+    border-radius:var(--radius);
+    cursor:pointer;
+    transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+    border:1px solid transparent;
+  }
+  .btn-primary{background:var(--amber-bright); color:var(--ink);}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(240,169,63,0.28);}
+  .btn-ghost{border-color:var(--line); color:var(--foam);}
+  .btn-ghost:hover{border-color:var(--amber-bright); color:var(--amber-bright);}
+
+  /* glass / pint visual */
+  .pint-wrap{position:relative; display:flex; justify-content:center; align-items:flex-end; height:460px;}
+  .pint{
+    position:relative;
+    width:190px; height:380px;
+    background:linear-gradient(180deg, rgba(240,169,63,0.95) 0%, rgba(217,142,34,0.92) 100%);
+    border-radius:14px 14px 30px 30px;
+    border:3px solid rgba(243,230,207,0.25);
+    box-shadow:0 30px 60px rgba(0,0,0,0.45), inset 0 0 40px rgba(255,255,255,0.08);
+    overflow:hidden;
+  }
+  .foam-top{
+    position:absolute; top:0; left:0; right:0; height:56px;
+    background:var(--foam);
+    border-radius:14px 14px 0 0;
+  }
+  .foam-top::after{
+    content:""; position:absolute; bottom:-14px; left:0; right:0; height:30px;
+    background:var(--foam);
+    -webkit-mask: radial-gradient(circle 9px at 10px 0, transparent 9px, black 9.5px) 0 0/22px 100% repeat-x;
+    mask: radial-gradient(circle 9px at 10px 0, transparent 9px, black 9.5px) 0 0/22px 100% repeat-x;
+  }
+  .bubble{position:absolute; border-radius:50%; background:rgba(255,255,255,0.35); animation:rise linear infinite;}
+  @keyframes rise{ from{transform:translateY(0); opacity:0.8;} to{transform:translateY(-340px); opacity:0;} }
+
+  .scroll-cue{
+    position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
+    z-index:2;
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    font-family:'JetBrains Mono',monospace; font-size:0.68rem; letter-spacing:0.18em;
+    text-transform:uppercase; opacity:0.55;
+  }
+  .scroll-cue .line{width:1px; height:30px; background:var(--amber-bright); animation:pulse 1.8s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:0.3;} 50%{opacity:1;}}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{position:relative; z-index:1; padding:120px 0;}
+  .section-head{margin-bottom:56px; max-width:640px;}
+  .section-head .eyebrow{margin-bottom:14px; display:block;}
+  .section-head h2{font-size:clamp(2.2rem,4.5vw,3.2rem);}
+  .divider{
+    height:1px; background:var(--line); width:100%; margin: 0 0;
+  }
+
+  /* fade-in on scroll */
+  .reveal{opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- ABOUT ---------- */
+  .about{background:var(--ink);}
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center;}
+  .about p{color:var(--cream); opacity:0.8; margin-bottom:18px; max-width:480px;}
+  .stat-strip{display:flex; gap:0; margin-top:36px; border-top:1px solid var(--line);}
+  .stat{flex:1; padding:22px 0 0; border-right:1px solid var(--line);}
+  .stat:last-child{border-right:none;}
+  .stat .num{font-family:'Anton',sans-serif; font-size:2.1rem; color:var(--amber-bright);}
+  .stat .lbl{font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; opacity:0.6; margin-top:4px;}
+
+  .about-visual{
+    position:relative; aspect-ratio:4/5;
+    background:
+      linear-gradient(160deg, rgba(217,142,34,0.18), transparent 60%),
+      repeating-linear-gradient(90deg, #2c1c14 0 28px, #321f16 28px 56px);
+    border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .about-visual .tap{
+    font-family:'Anton',sans-serif; font-size:5.5rem; color:rgba(243,230,207,0.07);
+  }
+
+  /* ---------- MENU ---------- */
+  .menu{background:var(--wood-dark);}
+  .menu-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .menu-card{
+    background:var(--ink); padding:34px 28px;
+    transition:background .25s ease;
+  }
+  .menu-card:hover{background:#241611;}
+  .menu-card .tag{font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.1em; color:var(--amber-bright); text-transform:uppercase;}
+  .menu-card h3{font-size:1.5rem; margin:10px 0 10px;}
+  .menu-card p{font-size:0.9rem; opacity:0.68; margin-bottom:18px;}
+  .menu-card .price{font-family:'JetBrains Mono',monospace; font-weight:600; font-size:0.95rem; color:var(--cream); border-top:1px dashed var(--line); padding-top:14px;}
+
+  /* ---------- HOURS / LOCATION ---------- */
+  .hours{background:var(--ink);}
+  .hours-grid{display:grid; grid-template-columns:1fr 1fr; gap:70px;}
+  .hours-table{border-top:1px solid var(--line);}
+  .hours-row{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:14px 4px; border-bottom:1px solid var(--line);
+    font-size:0.95rem;
+  }
+  .hours-row .day{text-transform:capitalize; opacity:0.8;}
+  .hours-row .time{font-family:'JetBrains Mono',monospace; opacity:0.8;}
+  .hours-row.today{
+    background:rgba(240,169,63,0.07);
+    margin:0 -16px; padding:14px 16px;
+    border-bottom:1px solid rgba(240,169,63,0.25);
+  }
+  .hours-row.today .day, .hours-row.today .time{color:var(--amber-bright); font-weight:700; opacity:1;}
+  .hours-row.today .day::after{content:" — azi"; font-size:0.7rem; font-weight:600; opacity:0.8;}
+
+  .busy-box{margin-top:42px;}
+  .busy-box .eyebrow{display:block; margin-bottom:16px;}
+  .busy-chart{display:flex; align-items:flex-end; gap:5px; height:90px;}
+  .busy-bar{flex:1; background:var(--line); border-radius:2px 2px 0 0; position:relative; transition:background .2s ease;}
+  .busy-bar.peak{background:var(--amber-bright);}
+  .busy-bar:hover::after{
+    content:attr(data-h); position:absolute; bottom:100%; left:50%; transform:translateX(-50%);
+    font-family:'JetBrains Mono',monospace; font-size:0.65rem; background:var(--cream); color:var(--ink);
+    padding:2px 5px; border-radius:2px; white-space:nowrap; margin-bottom:4px;
+  }
+  .busy-axis{display:flex; justify-content:space-between; font-size:0.65rem; opacity:0.45; margin-top:6px; font-family:'JetBrains Mono',monospace;}
+  .busy-note{font-size:0.82rem; opacity:0.6; margin-top:14px;}
+
+  .loc-card{
+    border:1px solid var(--line); padding:34px; display:flex; flex-direction:column; gap:18px;
+    background:rgba(243,230,207,0.02);
+  }
+  .loc-row{display:flex; gap:14px; align-items:flex-start;}
+  .loc-icon{
+    width:38px; height:38px; flex:none; border-radius:50%;
+    border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--amber-bright); font-size:1rem;
+  }
+  .loc-row h4{font-size:0.95rem; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:3px;}
+  .loc-row p{font-size:0.9rem; opacity:0.7;}
+  .map-link{margin-top:6px;}
+
+  /* ---------- REVIEWS ---------- */
+  .reviews{background:var(--wood-dark);}
+  .rating-hero{display:flex; align-items:center; gap:26px; margin-bottom:50px; flex-wrap:wrap;}
+  .rating-big{font-family:'Anton',sans-serif; font-size:5rem; color:var(--amber-bright); line-height:1;}
+  .rating-meta .stars{font-size:1.3rem;}
+  .rating-meta p{font-size:0.85rem; opacity:0.6; margin-top:4px;}
+  .review-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .review-card{
+    border:1px solid var(--line); padding:28px; background:rgba(243,230,207,0.03);
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .review-card .stars{font-size:0.85rem;}
+  .review-card p{font-size:0.92rem; opacity:0.82; flex:1;}
+  .reviewer{display:flex; align-items:center; gap:10px; font-size:0.82rem;}
+  .reviewer .avatar{
+    width:30px; height:30px; border-radius:50%;
+    background:linear-gradient(135deg,var(--amber-bright),var(--amber));
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Anton',sans-serif; color:var(--ink); font-size:0.8rem;
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact{background:var(--ink);}
+  .contact-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:70px;}
+  .contact-info p{opacity:0.75; margin-bottom:28px; max-width:380px;}
+  .info-line{display:flex; gap:12px; margin-bottom:16px; font-size:0.95rem;}
+  .info-line span.k{color:var(--amber-bright); font-family:'JetBrains Mono',monospace; font-size:0.78rem; text-transform:uppercase; min-width:90px;}
+
+  form{display:flex; flex-direction:column; gap:16px;}
+  .field{display:flex; flex-direction:column; gap:6px;}
+  .field label{font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; opacity:0.6;}
+  .field input, .field textarea{
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--foam);
+    padding:13px 14px;
+    font-family:'Work Sans',sans-serif;
+    font-size:0.95rem;
+    border-radius:var(--radius);
+    transition:border-color .2s ease;
+  }
+  .field input:focus, .field textarea:focus{outline:none; border-color:var(--amber-bright);}
+  .field textarea{resize:vertical; min-height:110px;}
+  .form-msg{font-size:0.85rem; color:var(--amber-bright); min-height:18px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--wood); border-top:1px solid var(--line); padding:54px 0 28px;
+  }
+  .footer-grid{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:30px; margin-bottom:36px;}
+  .footer-col h4{font-size:0.78rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--amber-bright); margin-bottom:14px;}
+  .footer-col p, .footer-col a{font-size:0.9rem; opacity:0.75; display:block; margin-bottom:8px;}
+  .footer-col a:hover{opacity:1; color:var(--amber-bright);}
+  .social-row{display:flex; gap:14px;}
+  .social-row a{
+    width:36px; height:36px; border:1px solid var(--line); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:0.85rem;
+  }
+  .social-row a:hover{border-color:var(--amber-bright);}
+  .footer-bottom{
+    border-top:1px solid var(--line); padding-top:22px;
+    display:flex; justify-content:space-between; font-size:0.78rem; opacity:0.5; flex-wrap:wrap; gap:10px;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:900px){
+    nav{display:none;}
+    .burger{display:flex;}
+    .hero .wrap{grid-template-columns:1fr; text-align:left;}
+    .pint-wrap{height:300px; order:-1; margin-bottom:10px;}
+    .pint{width:140px; height:260px;}
+    .about-grid, .hours-grid, .contact-grid{grid-template-columns:1fr;}
+    .menu-grid{grid-template-columns:1fr;}
+    .review-grid{grid-template-columns:1fr;}
+    section{padding:80px 0;}
+    .stat-strip{flex-wrap:wrap;}
+    .stat{flex:1 1 50%; border-right:none; border-bottom:1px solid var(--line); padding-bottom:14px; margin-bottom:14px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="wrap">
+    <a href="file:///C:/Users/LENOVO/Downloads/index_3.html#top" class="logo"><span class="dot"></span>BEER<span style="-webkit-text-stroke:1px var(--amber-bright); color:transparent;">BRO</span></a>
+    <nav>
+      <a href="file:///C:/Users/LENOVO/Downloads/index_3.html#top">Acasă</a>
+      <a href="file:///C:/Users/LENOVO/Downloads/index_3.html#despre">Despre</a>
+      <a href="file:///C:/Users/LENOVO/Downloads/index_3.html#meniu">Meniu</a>
+      <a href="file:///C:/Users/LENOVO/Downloads/index_3.html#program">Program</a>
+      <a href="file:///C:/Users/LENOVO/Downloads/index_3.html#recenzii">Recenzii</a>
+      <a href="file:///C:/Users/LENOVO/Downloads/index_3.html#contact">Contact</a>
+    </nav>
+    <button class="burger" id="burgerBtn" aria-label="Deschide meniul">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="file:///C:/Users/LENOVO/Downloads/index_3.html#top">Acasă</a>
+  <a href="file:///C:/Users/LENOVO/Downloads/index_3.html#despre">Despre</a>
+  <a href="file:///C:/Users/LENOVO/Downloads/index_3.html#meniu">Meniu</a>
+  <a href="file:///C:/Users/LENOVO/Downloads/index_3.html#program">Program</a>
+  <a href="file:///C:/Users/LENOVO/Downloads/index_3.html#recenzii">Recenzii</a>
+  <a href="file:///C:/Users/LENOVO/Downloads/index_3.html#contact">Contact</a>
+</div>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" style="padding-top:0;">
+    <div class="hero-bg"></div>
+    <div class="wrap">
+      <div>
+        <div class="badge-row">
+          <div class="rating-badge">
+            <span class="stars">★★★★★</span>
+            <span class="rating-num">5,0</span>
+            <span class="rating-sub">· recenzii Google</span>
+          </div>
+        </div>
+        <h1>BEM<br>BERE<br><span class="stroke">BUNĂ.</span></h1>
+        <p class="lede">BeerBro e locul din Florești unde o halbă rece și o seară lungă merg mereu împreună. Deschis în fiecare zi, de la prânz până seara târziu.</p>
+        <div class="cta-row">
+          <a href="file:///C:/Users/LENOVO/Downloads/index_3.html#meniu" class="btn btn-primary">Vezi meniul</a>
+          <a href="file:///C:/Users/LENOVO/Downloads/index_3.html#program" class="btn btn-ghost">Program &amp; locație</a>
+        </div>
+      </div>
+      <div class="pint-wrap">
+        <div class="pint" id="pintGlass">
+          <div class="foam-top"></div>
+        <div class="bubble" style="width: 6.04999px; height: 6.04999px; left: 57.402%; bottom: 10px; animation-duration: 5.42475s; animation-delay: 1.61986s;"></div><div class="bubble" style="width: 6.70193px; height: 6.70193px; left: 21.8367%; bottom: 10px; animation-duration: 3.19878s; animation-delay: 2.44432s;"></div><div class="bubble" style="width: 5.5181px; height: 5.5181px; left: 64.9383%; bottom: 10px; animation-duration: 5.71464s; animation-delay: 0.26454s;"></div><div class="bubble" style="width: 3.48315px; height: 3.48315px; left: 81.629%; bottom: 10px; animation-duration: 3.1163s; animation-delay: 1.99496s;"></div><div class="bubble" style="width: 5.8843px; height: 5.8843px; left: 48.309%; bottom: 10px; animation-duration: 3.15072s; animation-delay: 1.17393s;"></div><div class="bubble" style="width: 4.11784px; height: 4.11784px; left: 74.4189%; bottom: 10px; animation-duration: 4.12163s; animation-delay: 1.23858s;"></div><div class="bubble" style="width: 4.65946px; height: 4.65946px; left: 31.6841%; bottom: 10px; animation-duration: 4.83023s; animation-delay: 3.206s;"></div><div class="bubble" style="width: 5.88921px; height: 5.88921px; left: 39.1291%; bottom: 10px; animation-duration: 5.54682s; animation-delay: 3.55421s;"></div><div class="bubble" style="width: 4.46047px; height: 4.46047px; left: 71.1623%; bottom: 10px; animation-duration: 5.52895s; animation-delay: 1.95691s;"></div><div class="bubble" style="width: 3.13005px; height: 3.13005px; left: 34.6825%; bottom: 10px; animation-duration: 3.83104s; animation-delay: 2.92885s;"></div><div class="bubble" style="width: 3.27362px; height: 3.27362px; left: 45.6133%; bottom: 10px; animation-duration: 5.06997s; animation-delay: 2.70202s;"></div><div class="bubble" style="width: 6.6192px; height: 6.6192px; left: 71.0138%; bottom: 10px; animation-duration: 4.63279s; animation-delay: 3.29603s;"></div><div class="bubble" style="width: 6.01862px; height: 6.01862px; left: 67.4451%; bottom: 10px; animation-duration: 3.74961s; animation-delay: 3.3286s;"></div><div class="bubble" style="width: 5.63968px; height: 5.63968px; left: 56.5332%; bottom: 10px; animation-duration: 5.36589s; animation-delay: 1.99865s;"></div></div>
+      </div>
+    </div>
+    <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="despre">
+    <div class="wrap about-grid">
+      <div class="reveal">
+        <span class="eyebrow">Despre BeerBro</span>
+        <h2>Bar de cartier,<br>spirit de berărie.</h2>
+        <p>BeerBro nu vrea să fie cel mai elegant local din Florești — vrea să fie cel mai bun loc unde te oprești pentru o bere bine trasă, fie că stai 15 minute la o halbă rapidă, fie că rămâi toată seara cu prietenii.</p>
+        <p>Lemn, lumină caldă și o listă de beri care se schimbă des — atât ne trebuie ca să te facem să revii.</p>
+        <div class="stat-strip">
+          <div class="stat"><div class="num">5,0</div><div class="lbl">Rating Google</div></div>
+          <div class="stat"><div class="num">7/7</div><div class="lbl">Zile pe săptămână</div></div>
+          <div class="stat"><div class="num">12h</div><div class="lbl">Deschis zilnic</div></div>
+        </div>
+      </div>
+      <div class="about-visual reveal"><span class="tap">🍺</span></div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu" id="meniu">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">La halbă</span>
+        <h2>Beri &amp; meniu</h2>
+      </div>
+      <div class="menu-grid reveal">
+        <div class="menu-card">
+          <span class="tag">Draft</span>
+          <h3>Blondă Craft</h3>
+          <p>Ușoară, spumoasă, perfectă pentru o pauză rapidă de 15 minute la tejghea.</p>
+          <div class="price">de la 22 MDL / 0,5L</div>
+        </div>
+        <div class="menu-card">
+          <span class="tag">Draft</span>
+          <h3>IPA Bro</h3>
+          <p>Amăruie și aromată, cu note de hamei proaspăt — preferata clienților fideli.</p>
+          <div class="price">de la 28 MDL / 0,5L</div>
+        </div>
+        <div class="menu-card">
+          <span class="tag">Sezonier</span>
+          <h3>Dark Porter</h3>
+          <p>Corp plin, note de caramel și cafea — pentru serile lungi de weekend.</p>
+          <div class="price">de la 30 MDL / 0,5L</div>
+        </div>
+        <div class="menu-card">
+          <span class="tag">Snack</span>
+          <h3>Platou Bro</h3>
+          <p>Mezeluri, brânzeturi și crutoane — partenerul ideal pentru orice halbă.</p>
+          <div class="price">95 MDL</div>
+        </div>
+        <div class="menu-card">
+          <span class="tag">Snack</span>
+          <h3>Aripioare Picante</h3>
+          <p>Crocante, cu sos de casă — exact ce trebuie la ora de vârf, 19:00.</p>
+          <div class="price">85 MDL</div>
+        </div>
+        <div class="menu-card">
+          <span class="tag">Take-away</span>
+          <h3>Bere la Pet</h3>
+          <p>Ia berea preferată acasă — la 1L sau 2L, umplută la moment.</p>
+          <div class="price">de la 60 MDL</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOURS / LOCATION -->
+  <section class="hours" id="program">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Program &amp; locație</span>
+        <h2>Te așteptăm<br>în fiecare zi.</h2>
+      </div>
+      <div class="hours-grid">
+        <div class="reveal">
+          <div class="hours-table" id="hoursTable"><div class="hours-row"><span class="day">luni</span><span class="time">10:00 – 22:00</span></div><div class="hours-row"><span class="day">marți</span><span class="time">10:00 – 22:00</span></div><div class="hours-row"><span class="day">miercuri</span><span class="time">10:00 – 22:00</span></div><div class="hours-row"><span class="day">joi</span><span class="time">10:00 – 22:00</span></div><div class="hours-row today"><span class="day">vineri</span><span class="time">10:00 – 22:00</span></div><div class="hours-row"><span class="day">sâmbătă</span><span class="time">10:00 – 22:00</span></div><div class="hours-row"><span class="day">duminică</span><span class="time">10:00 – 22:00</span></div></div>
+          <div class="busy-box">
+            <span class="eyebrow">Ore populare</span>
+            <div class="busy-chart" id="busyChart"><div class="busy-bar" data-h="10:00" style="height: 20%;"></div><div class="busy-bar" data-h="11:00" style="height: 28%;"></div><div class="busy-bar" data-h="12:00" style="height: 40%;"></div><div class="busy-bar" data-h="13:00" style="height: 38%;"></div><div class="busy-bar" data-h="14:00" style="height: 32%;"></div><div class="busy-bar" data-h="15:00" style="height: 30%;"></div><div class="busy-bar" data-h="16:00" style="height: 45%;"></div><div class="busy-bar" data-h="17:00" style="height: 60%;"></div><div class="busy-bar" data-h="18:00" style="height: 80%;"></div><div class="busy-bar peak" data-h="19:00" style="height: 100%;"></div><div class="busy-bar" data-h="20:00" style="height: 75%;"></div><div class="busy-bar" data-h="21:00" style="height: 45%;"></div></div>
+            <div class="busy-axis"><span>10:00</span><span>14:00</span><span>19:00</span><span>22:00</span></div>
+            <p class="busy-note">De obicei, în jurul orei <strong style="color:var(--amber-bright)">19:00</strong> e cel mai aglomerat. O vizită durează în medie ~15 minute — perfect și pentru o halbă rapidă.</p>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="loc-card">
+            <div class="loc-row">
+              <div class="loc-icon">📍</div>
+              <div>
+                <h4>Adresă</h4>
+                <p>Bul. Victoriei 57, Florești</p>
+              </div>
+            </div>
+            <div class="loc-row">
+              <div class="loc-icon">🕒</div>
+              <div>
+                <h4>Program</h4>
+                <p>Zilnic, 10:00 – 22:00</p>
+              </div>
+            </div>
+            <div class="loc-row">
+              <div class="loc-icon">⭐</div>
+              <div>
+                <h4>Rating</h4>
+                <p>5,0 din recenzii Google</p>
+              </div>
+            </div>
+            <a class="btn btn-primary map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Bulevardul+Victoriei+57+Floresti" target="_blank" rel="noopener">Deschide în Google Maps</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews" id="recenzii">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Recenzii</span>
+        <h2>Ce spun cei<br>de la bar.</h2>
+      </div>
+      <div class="rating-hero reveal">
+        <div class="rating-big">5,0</div>
+        <div class="rating-meta">
+          <div class="stars">★★★★★</div>
+          <p>Rating mediu pe baza recenziilor Google</p>
+        </div>
+      </div>
+      <div class="review-grid reveal">
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>"Cea mai bună bere trasă din Florești. Personalul e prietenos și atmosfera e exact cum trebuie."</p>
+          <div class="reviewer"><div class="avatar">A</div>Andrei M.</div>
+        </div>
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>"Trec des după muncă pentru o halbă rapidă — în 15 minute sunt servit și plecat mulțumit."</p>
+          <div class="reviewer"><div class="avatar">D</div>Diana C.</div>
+        </div>
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>"Program excelent, deschis în fiecare zi. Local de cartier cu suflet adevărat."</p>
+          <div class="reviewer"><div class="avatar">V</div>Vlad R.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap contact-grid">
+      <div class="contact-info reveal">
+        <span class="eyebrow">Contact</span>
+        <h2>Hai la o bere.</h2>
+        <p>Ai o întrebare, vrei să rezervi o masă pentru grup sau vrei pur și simplu să ne spui ce bere ți-a plăcut cel mai mult? Scrie-ne.</p>
+        <div class="info-line"><span class="k">Adresă</span><span>Bul. Victoriei 57, Florești</span></div>
+        <div class="info-line"><span class="k">Program</span><span>Zilnic, 10:00 – 22:00</span></div>
+        <div class="info-line"><span class="k">Rating</span><span>5,0 ★ Google</span></div>
+      </div>
+      <form class="reveal" id="contactForm">
+        <div class="field">
+          <label for="name">Nume</label>
+          <input type="text" id="name" placeholder="Numele tău" required="">
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="email@exemplu.com" required="">
+        </div>
+        <div class="field">
+          <label for="msg">Mesaj</label>
+          <textarea id="msg" placeholder="Spune-ne ce ai pe suflet..." required=""></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="align-self:flex-start;">Trimite mesajul</button>
+        <p class="form-msg" id="formMsg"></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>BeerBro</h4>
+        <p>Bul. Victoriei 57<br>Florești, Moldova</p>
+      </div>
+      <div class="footer-col">
+        <h4>Program</h4>
+        <p>Luni – Duminică</p>
+        <p>10:00 – 22:00</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigare</h4>
+        <a href="file:///C:/Users/LENOVO/Downloads/index_3.html#despre">Despre</a>
+        <a href="file:///C:/Users/LENOVO/Downloads/index_3.html#meniu">Meniu</a>
+        <a href="file:///C:/Users/LENOVO/Downloads/index_3.html#recenzii">Recenzii</a>
+      </div>
+      <div class="footer-col">
+        <h4>Urmărește-ne</h4>
+        <div class="social-row">
+          <a href="file:///C:/Users/LENOVO/Downloads/index_3.html#" aria-label="Facebook">f</a>
+          <a href="file:///C:/Users/LENOVO/Downloads/index_3.html#" aria-label="Instagram">ig</a>
+          <a href="https://www.tiktok.com/@beerbro.1" target="_blank" rel="noopener" aria-label="TikTok">tt</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 BeerBro. Toate drepturile rezervate.</span>
+      <span>Făcut cu 🍺 în Florești.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Header scroll state
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Mobile nav
+  const burger = document.getElementById('burgerBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+  });
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    burger.classList.remove('open');
+    mobileNav.classList.remove('open');
+  }));
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  }, {threshold:0.15});
+  revealEls.forEach(el => io.observe(el));
+
+  // Days / hours table with "today" highlight
+  const days = [
+    {key:1, label:'luni'}, {key:2, label:'marți'}, {key:3, label:'miercuri'},
+    {key:4, label:'joi'}, {key:5, label:'vineri'}, {key:6, label:'sâmbătă'}, {key:0, label:'duminică'}
+  ];
+  const todayIdx = new Date().getDay();
+  const hoursTable = document.getElementById('hoursTable');
+  days.forEach(d => {
+    const row = document.createElement('div');
+    row.className = 'hours-row' + (d.key === todayIdx ? ' today' : '');
+    row.innerHTML = `<span class="day">${d.label}</span><span class="time">10:00 – 22:00</span>`;
+    hoursTable.appendChild(row);
+  });
+
+  // Busy chart (approximate popular-hours shape, peak ~19:00)
+  const hourLabels = [10,11,12,13,14,15,16,17,18,19,20,21];
+  const busyLevels = [20,28,40,38,32,30,45,60,80,100,75,45]; // relative %
+  const busyChart = document.getElementById('busyChart');
+  busyLevels.forEach((v,i) => {
+    const bar = document.createElement('div');
+    bar.className = 'busy-bar' + (v === Math.max(...busyLevels) ? ' peak' : '');
+    bar.style.height = v + '%';
+    bar.setAttribute('data-h', hourLabels[i] + ':00');
+    busyChart.appendChild(bar);
+  });
+
+  // Rising bubbles in the pint
+  const pint = document.getElementById('pintGlass');
+  for(let i=0;i<14;i++){
+    const b = document.createElement('div');
+    b.className = 'bubble';
+    const size = 3 + Math.random()*4;
+    b.style.width = size+'px';
+    b.style.height = size+'px';
+    b.style.left = (10 + Math.random()*80)+'%';
+    b.style.bottom = '10px';
+    b.style.animationDuration = (3 + Math.random()*3)+'s';
+    b.style.animationDelay = (Math.random()*4)+'s';
+    pint.appendChild(b);
+  }
+
+  // Contact form (visual only)
+  const form = document.getElementById('contactForm');
+  const formMsg = document.getElementById('formMsg');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    formMsg.textContent = 'Mulțumim! Mesajul a fost trimis — revenim cât mai curând.';
+    form.reset();
+  });
+</script>
+
+
+
+</body></html>
