@@ -3,153 +3,254 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BeerBro — Bar & Berărie, Florești</title>
+<title>BeerBro — Bar & Berărie</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com/">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<!-- restul CSS rămâne EXACT la tine (nu l-am modificat) -->
 <style>
-/* 🔴 PASTREAZĂ TOT CSS-UL TĂU AICI (nemodificat) */
+:root{
+  --bg:#120b08;
+  --card:#1c120f;
+  --accent:#ffb347;
+  --text:#f5e9dd;
+  --muted:rgba(255,255,255,0.65);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Work Sans',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+/* smooth scroll */
+html{scroll-behavior:smooth;}
+
+/* HEADER */
+header{
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:18px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(0,0,0,0.2);
+  backdrop-filter:blur(10px);
+  z-index:100;
+  transition:0.3s;
+}
+header.scrolled{background:rgba(0,0,0,0.7);}
+.logo{
+  font-family:'Anton';
+  font-size:22px;
+  color:var(--accent);
+}
+nav a{
+  margin:0 12px;
+  color:var(--text);
+  text-decoration:none;
+  opacity:0.8;
+  transition:0.3s;
+}
+nav a:hover{opacity:1;color:var(--accent);}
+
+/* HERO */
+.hero{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position:relative;
+  padding:20px;
+  background:url('https://images.unsplash.com/photo-1514361892635-cebb6b6f2a1f?auto=format&fit=crop&w=1600&q=80') center/cover;
+}
+.hero::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.65);
+}
+.hero-content{
+  position:relative;
+  z-index:2;
+}
+.hero h1{
+  font-family:'Anton';
+  font-size:70px;
+  color:var(--accent);
+  letter-spacing:2px;
+  animation:fadeDown 1s ease;
+}
+.hero p{
+  margin-top:15px;
+  color:var(--muted);
+  animation:fadeUp 1.2s ease;
+}
+.btn{
+  margin-top:25px;
+  display:inline-block;
+  padding:12px 28px;
+  background:var(--accent);
+  color:#000;
+  border-radius:6px;
+  font-weight:600;
+  transition:0.3s;
+}
+.btn:hover{transform:scale(1.05);}
+
+/* SECTIONS */
+section{
+  padding:90px 10%;
+}
+
+.section-title{
+  font-size:32px;
+  margin-bottom:30px;
+  font-family:'Anton';
+  color:var(--accent);
+}
+
+/* ABOUT */
+.about{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  align-items:center;
+}
+.about img{
+  width:100%;
+  border-radius:12px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.5);
+  transition:0.5s;
+}
+.about img:hover{transform:scale(1.03);}
+
+/* MENU */
+.menu{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+.card{
+  background:var(--card);
+  padding:20px;
+  border-radius:12px;
+  transition:0.4s;
+  border:1px solid rgba(255,255,255,0.05);
+}
+.card:hover{
+  transform:translateY(-8px);
+  border-color:var(--accent);
+  box-shadow:0 10px 30px rgba(255,179,71,0.15);
+}
+
+/* GALLERY */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+.gallery img{
+  width:100%;
+  border-radius:10px;
+  transition:0.4s;
+}
+.gallery img:hover{
+  transform:scale(1.05);
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:40px;
+  background:#0a0604;
+  color:var(--muted);
+}
+
+/* ANIMATIONS */
+@keyframes fadeDown{
+  from{opacity:0;transform:translateY(-20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .hero h1{font-size:42px;}
+  .about{grid-template-columns:1fr;}
+  .gallery{grid-template-columns:1fr;}
+  nav{display:none;}
+}
 </style>
 </head>
 
 <body>
 
-<header id="siteHeader">
-  <div class="wrap">
-
-    <!-- FIX: file:/// -> #top -->
-    <a href="#top" class="logo">
-      <span class="dot"></span>BEER<span style="-webkit-text-stroke:1px var(--amber-bright); color:transparent;">BRO</span>
-    </a>
-
-    <nav>
-      <a href="#top">Acasă</a>
-      <a href="#despre">Despre</a>
-      <a href="#meniu">Meniu</a>
-      <a href="#program">Program</a>
-      <a href="#recenzii">Recenzii</a>
-      <a href="#contact">Contact</a>
-    </nav>
-
-    <button class="burger" id="burgerBtn">
-      <span></span><span></span><span></span>
-    </button>
-
-  </div>
+<header id="header">
+  <div class="logo">BEERBRO</div>
+  <nav>
+    <a href="#home">Acasă</a>
+    <a href="#about">Despre</a>
+    <a href="#menu">Meniu</a>
+    <a href="#gallery">Galerie</a>
+  </nav>
 </header>
 
-<div class="mobile-nav" id="mobileNav">
-  <a href="#top">Acasă</a>
-  <a href="#despre">Despre</a>
-  <a href="#meniu">Meniu</a>
-  <a href="#program">Program</a>
-  <a href="#recenzii">Recenzii</a>
-  <a href="#contact">Contact</a>
-</div>
-
-<main id="top">
-
-<!-- HERO -->
-<section class="hero" style="padding-top:0;">
-  <div class="hero-bg"></div>
-  <div class="wrap">
-
-    <div>
-      <div class="badge-row">
-        <div class="rating-badge">
-          <span class="stars">★★★★★</span>
-          <span class="rating-num">5,0</span>
-          <span class="rating-sub">· recenzii Google</span>
-        </div>
-      </div>
-
-      <h1>BEM<br>BERE<br><span class="stroke">BUNĂ.</span></h1>
-
-      <p class="lede">
-        BeerBro e locul din Florești unde o halbă rece și o seară lungă merg mereu împreună.
-      </p>
-
-      <div class="cta-row">
-        <!-- FIX -->
-        <a href="#meniu" class="btn btn-primary">Vezi meniul</a>
-        <a href="#program" class="btn btn-ghost">Program & locație</a>
-      </div>
-    </div>
-
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>BEA BERE BUNĂ</h1>
+    <p>Atmosferă relaxată • Bere rece • Prieteni adevărați</p>
+    <a href="#menu" class="btn">Vezi meniul</a>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="about" id="despre">...</section>
+<section id="about">
+  <h2 class="section-title">Despre noi</h2>
+  <div class="about">
+    <div>
+      <p>
+        BeerBro este locul unde vii pentru o bere bună și rămâi pentru atmosferă.
+        Muzică bună, lumină caldă și vibe de bar autentic.
+      </p>
+    </div>
+    <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=1000&q=80">
+  </div>
+</section>
 
-<!-- MENU -->
-<section class="menu" id="meniu">...</section>
+<section id="menu">
+  <h2 class="section-title">Meniu</h2>
+  <div class="menu">
+    <div class="card">🍺 Blondă Craft - 22 MDL</div>
+    <div class="card">🍺 IPA Bro - 28 MDL</div>
+    <div class="card">🍺 Dark Porter - 30 MDL</div>
+    <div class="card">🍗 Aripioare - 85 MDL</div>
+  </div>
+</section>
 
-<!-- HOURS -->
-<section class="hours" id="program">...</section>
-
-<!-- REVIEWS -->
-<section class="reviews" id="recenzii">...</section>
-
-<!-- CONTACT -->
-<section class="contact" id="contact">...</section>
-
-</main>
+<section id="gallery">
+  <h2 class="section-title">Galerie</h2>
+  <div class="gallery">
+    <img src="https://images.unsplash.com/photo-1527169402691-a3fb4b3b4a3c?auto=format&fit=crop&w=800&q=80">
+    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80">
+    <img src="https://images.unsplash.com/photo-1514361892635-cebb6b6f2a1f?auto=format&fit=crop&w=800&q=80">
+  </div>
+</section>
 
 <footer>
-  <div class="wrap">
-
-    <div class="footer-grid">
-
-      <div class="footer-col">
-        <h4>BeerBro</h4>
-        <p>Bul. Victoriei 57<br>Florești, Moldova</p>
-      </div>
-
-      <div class="footer-col">
-        <h4>Program</h4>
-        <p>Luni – Duminică</p>
-        <p>10:00 – 22:00</p>
-      </div>
-
-      <div class="footer-col">
-        <h4>Navigare</h4>
-        <a href="#despre">Despre</a>
-        <a href="#meniu">Meniu</a>
-        <a href="#recenzii">Recenzii</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Urmărește-ne</h4>
-        <div class="social-row">
-          <a href="#">f</a>
-          <a href="#">ig</a>
-          <a href="https://www.tiktok.com/@beerbro.1" target="_blank">tt</a>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
+  © 2026 BeerBro — făcut cu 🍺 în Florești
 </footer>
 
 <script>
-/* FIX NAV MOBILE - rămâne la fel, doar funcționează corect acum */
-const burger = document.getElementById('burgerBtn');
-const mobileNav = document.getElementById('mobileNav');
-
-burger.addEventListener('click', () => {
-  burger.classList.toggle('open');
-  mobileNav.classList.toggle('open');
-});
-
-mobileNav.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => {
-    burger.classList.remove('open');
-    mobileNav.classList.remove('open');
-  });
+// header scroll effect
+window.addEventListener("scroll",()=>{
+  document.getElementById("header")
+  .classList.toggle("scrolled",window.scrollY>50);
 });
 </script>
 
