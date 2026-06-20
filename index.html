@@ -3,17 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luxury Beer Bar</title>
+<title>BeerBro Luxury</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
+
 body{
   font-family:Inter;
-  background:#0b0b10;
-  color:white;
+  background:#07070a;
+  color:#fff;
   overflow-x:hidden;
+}
+
+/* LIGHT GOLD */
+:root{
+  --gold:#c8a96a;
+  --dark:#07070a;
 }
 
 /* NAV */
@@ -23,68 +30,81 @@ nav{
   width:100%;
   display:flex;
   justify-content:space-between;
-  padding:20px 50px;
-  backdrop-filter: blur(12px);
-  background:rgba(0,0,0,0.3);
-  z-index:100;
+  padding:20px 60px;
+  background:rgba(0,0,0,0.4);
+  backdrop-filter:blur(15px);
+  z-index:1000;
+}
+nav b{
+  color:var(--gold);
+  letter-spacing:2px;
 }
 nav a{
   color:white;
-  text-decoration:none;
   margin:0 15px;
+  text-decoration:none;
   opacity:0.7;
   transition:0.3s;
 }
-nav a:hover{opacity:1;color:#c8a96a;}
+nav a:hover{
+  opacity:1;
+  color:var(--gold);
+}
 
-/* HERO */
+/* HERO 3D */
 .hero{
   height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
-  text-align:center;
   position:relative;
-  background:url('https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&w=1600&q=80') center/cover;
+  text-align:center;
+  perspective:1000px;
+  background:url('https://images.unsplash.com/photo-1527169402691-a3fb4b3b4a3c?auto=format&fit=crop&w=1600&q=80') center/cover;
 }
+
 .hero::after{
   content:'';
   position:absolute;
   inset:0;
   background:rgba(0,0,0,0.65);
 }
+
 .hero-content{
   position:relative;
   z-index:2;
-  animation:fade 1.2s ease;
+  transform:translateZ(0px);
+  transition:0.3s;
 }
+
 .hero h1{
-  font-size:60px;
-  letter-spacing:2px;
+  font-size:70px;
+  letter-spacing:3px;
+  color:var(--gold);
+  text-shadow:0 0 20px rgba(200,169,106,0.3);
 }
+
 .hero p{
   opacity:0.7;
   margin-top:10px;
 }
+
 .btn{
   margin-top:20px;
-  padding:12px 26px;
-  background:#c8a96a;
+  padding:12px 28px;
+  background:var(--gold);
   border:none;
-  color:black;
-  font-weight:600;
   cursor:pointer;
+  font-weight:600;
   border-radius:8px;
-  transition:0.3s;
 }
-.btn:hover{transform:scale(1.05);}
 
 /* SECTIONS */
 section{
-  padding:100px 10%;
+  padding:120px 10%;
 }
 
-/* GLASS CARDS */
+/* INFO GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -92,81 +112,110 @@ section{
 }
 
 .card{
-  background:rgba(255,255,255,0.05);
+  background:rgba(255,255,255,0.04);
   border:1px solid rgba(255,255,255,0.1);
-  padding:20px;
+  padding:25px;
   border-radius:16px;
-  backdrop-filter:blur(10px);
   transition:0.4s;
-  cursor:pointer;
+  transform-style:preserve-3d;
 }
 .card:hover{
-  transform:translateY(-10px);
-  border-color:#c8a96a;
+  transform:translateY(-10px) rotateX(10deg);
+  border-color:var(--gold);
 }
 
-/* ABOUT */
+/* ABOUT 3D */
 .about{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:40px;
+  gap:50px;
   align-items:center;
 }
-.about img{
-  width:100%;
+
+.about-box{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  padding:25px;
   border-radius:16px;
+  transform:rotateY(-5deg);
   transition:0.4s;
 }
-.about img:hover{transform:scale(1.03);}
-
-/* GALLERY */
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
+.about-box:hover{
+  transform:rotateY(0deg);
 }
-.gallery img{
-  width:100%;
-  border-radius:12px;
-  cursor:pointer;
+
+/* MENU */
+.menu-item{
+  background:rgba(255,255,255,0.04);
+  padding:20px;
+  border-radius:16px;
   transition:0.3s;
 }
-.gallery img:hover{
+.menu-item:hover{
   transform:scale(1.05);
+  border:1px solid var(--gold);
 }
 
-/* MODAL */
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.9);
-  display:none;
+/* 3D PARALLAX SECTION */
+.parallax{
+  height:400px;
+  background:url('https://images.unsplash.com/photo-1514361892635-cebb6b6f2a1f') center/cover;
+  background-attachment:fixed;
+  display:flex;
   align-items:center;
   justify-content:center;
-  z-index:200;
+  position:relative;
 }
-.modal img{
-  max-width:80%;
-  border-radius:12px;
+
+.parallax::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+}
+
+/* RESERVATION 3D */
+.reserve{
+  background:rgba(255,255,255,0.04);
+  padding:30px;
+  border-radius:18px;
+  max-width:500px;
+  margin:auto;
+  transform:rotateX(8deg);
+  transition:0.5s;
+}
+.reserve:hover{
+  transform:rotateX(0deg);
+}
+
+input{
+  width:100%;
+  margin:10px 0;
+  padding:12px;
+  border:none;
+  border-radius:8px;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  background:var(--gold);
+  border:none;
+  font-weight:600;
+  cursor:pointer;
+  border-radius:8px;
 }
 
 /* FOOTER */
 footer{
   text-align:center;
   padding:40px;
-  opacity:0.6;
-}
-
-/* ANIMATION */
-@keyframes fade{
-  from{opacity:0;transform:translateY(20px);}
-  to{opacity:1;transform:translateY(0);}
+  opacity:0.5;
 }
 
 @media(max-width:768px){
   .about{grid-template-columns:1fr;}
   .hero h1{font-size:40px;}
-  .gallery{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -174,69 +223,72 @@ footer{
 <body>
 
 <nav>
-  <div><b>BEERBRO</b></div>
+  <b>BEERBRO</b>
   <div>
     <a href="#about">Despre</a>
     <a href="#menu">Meniu</a>
-    <a href="#gallery">Galerie</a>
+    <a href="#rez">Rezervări</a>
   </div>
 </nav>
 
 <section class="hero">
-  <div class="hero-content">
+  <div class="hero-content" id="hero">
     <h1>Luxury Beer Experience</h1>
-    <p>Un loc modern, elegant și interactiv</p>
-    <button class="btn" onclick="document.getElementById('menu').scrollIntoView()">Explorează</button>
+    <p>Bar premium cu atmosferă elegantă</p>
+    <button class="btn">Vezi Meniul</button>
   </div>
 </section>
 
 <section id="about" class="about">
-  <div>
-    <h2>Despre noi</h2>
-    <p style="opacity:0.7;margin-top:10px;">
-      Un bar modern cu design minimalist, atmosferă premium și experiență interactivă.
-    </p>
+  <div class="about-box">
+    <h2>Despre BeerBro</h2>
+    <p>Bar premium, design modern, bere craft și atmosferă luxury.</p>
   </div>
-  <img src="https://images.unsplash.com/photo-1527169402691-a3fb4b3b4a3c?auto=format&fit=crop&w=1000&q=80">
+
+  <div class="about-box">
+    <h3>Program</h3>
+    <p>10:00 - 22:00 zilnic</p>
+    <p>Str. Victoriei 57, Florești</p>
+  </div>
 </section>
 
 <section id="menu">
-  <h2 style="margin-bottom:20px;">Meniu interactiv</h2>
+  <h2>Meniu</h2>
   <div class="grid">
-    <div class="card">🍺 IPA Premium <br><small>Click pentru detalii</small></div>
-    <div class="card">🍺 Blonde Ale <br><small>Fresh & light</small></div>
-    <div class="card">🍺 Dark Stout <br><small>Strong taste</small></div>
-    <div class="card">🍗 Snacks Deluxe</div>
+    <div class="menu-item">🍺 IPA Premium</div>
+    <div class="menu-item">🍺 Blonde Ale</div>
+    <div class="menu-item">🍺 Dark Stout</div>
+    <div class="menu-item">🍔 Snacks Deluxe</div>
   </div>
 </section>
 
-<section id="gallery">
-  <h2 style="margin-bottom:20px;">Galerie</h2>
-  <div class="gallery">
-    <img src="https://images.unsplash.com/photo-1514361892635-cebb6b6f2a1f">
-    <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187">
-    <img src="https://images.unsplash.com/photo-1527169402691-a3fb4b3b4a3c">
-  </div>
-</section>
-
-<div class="modal" id="modal" onclick="this.style.display='none'">
-  <img id="modalImg">
+<div class="parallax">
+  <h2 style="position:relative;z-index:2;color:#c8a96a;">
+    Experiență 3D BeerBro
+  </h2>
 </div>
 
+<section id="rez">
+  <h2>Rezervă masă</h2>
+
+  <div class="reserve" id="reserve">
+    <input placeholder="Nume">
+    <input type="date">
+    <input type="time">
+    <button>Rezervă acum</button>
+  </div>
+</section>
+
 <footer>
-  © 2026 BeerBro — aesthetic modern bar experience
+  © 2026 BeerBro Luxury Experience
 </footer>
 
 <script>
-// image modal
-const modal = document.getElementById("modal");
-const modalImg = document.getElementById("modalImg");
-
-document.querySelectorAll(".gallery img").forEach(img=>{
-  img.onclick = () =>{
-    modal.style.display="flex";
-    modalImg.src = img.src;
-  }
+// 🔥 3D HERO SCROLL EFFECT
+window.addEventListener("scroll", () => {
+  let y = window.scrollY;
+  document.getElementById("hero").style.transform =
+    `translateY(${y * 0.2}px) scale(${1 - y * 0.0003})`;
 });
 </script>
 
